@@ -2,40 +2,30 @@
   <h1>个人信息</h1>
   <h2>{{name}}</h2>
   <h2>{{age}}</h2>
-  <h2>{{sex}}</h2>
-  <button @click="sayHello">说话(Vue3)</button>
-  <button @click="sayWelcome">说话(Vue2)</button>
+  <button @click="changeInfo">修改人员信息</button>
+ 
 </template>
 
 <script>
 // import { h } from 'vue'
-
+import { ref } from 'vue'
 
 
 export default {
   name: 'App',
-  data () {
-    return {
-      sex:'男'
-    }
-  },
-  methods: {
-    sayWelcome(){
-      alert(`这个人的姓名为${this.name},年龄为${this.age},性别为${this.sex}`)
-    }
-  },
   setup() {
-    let name='张三'
-    let age=18
+    let name=ref('张三')
+    let age=ref(18)
 
-    function sayHello() {
-      alert(`这个人的姓名为${name},年龄为${age}`)
+    function changeInfo() {
+      name.value = "李四"
+      age.value=48
     }
 
    return{
     name,
     age,
-    sayHello
+    changeInfo
    } 
   // return ()=>h('h1','尚硅谷')
   }  
