@@ -1,28 +1,26 @@
 <template>
   <div class="app">
-    <h3>我是App组件(祖)---{{name}}---{{price}}</h3>
-    <Child></Child>
+    <h3>我是App组件</h3>
+    <Suspense>
+      <template v-slot:default>
+        <Child></Child>
+      </template>
+      <template v-slot:fallback>
+        <h3>正在加载中...</h3>
+      </template>
+    </Suspense>
   </div>
 </template>
 
 <script>
-import { reactive, toRefs,provide } from 'vue';
-import Child from './components/Child.vue';
+// import Child from './components/Child.vue';
+import { defineAsyncComponent } from 'vue'
+const Child = defineAsyncComponent(() => import ('./components/Child.vue'))
 export default {
   name: 'App',
   components: {
     Child
   },
-  setup() { 
-    let car = reactive({
-      name: '奔驰',
-      price:'30w'
-    })
-    provide('myCar',car)
-    return {
-      ...toRefs(car)
-    }
-  }
 }
 </script>
 
